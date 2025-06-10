@@ -1,18 +1,30 @@
 import Lottie from "lottie-react";
-import React from "react";
-
-const handleRegister =(e)=>{
-  e.preventDefault();
-  const form = e.target;
-  const email = form.email.value;
-  const password = form.password.value;
-
-  console.log(email, password);
-
-
-}
+import React, { use } from "react";
+import { Link } from "react-router";
+import { AuthContext } from "../../context/AuthContext";
 
 const Register = () => {
+  const {createUser, setLoading, setUser} = use(AuthContext);
+
+  const handleRegister = (e) =>{
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    createUser(email, password)
+    .then(result => {
+      setLoading(false);
+      const currentUser = result.user;
+      setUser(currentUser)
+    })
+    .catch(err =>{
+      console.log(err);
+      setLoading(false);
+    })
+    
+  }
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -28,7 +40,7 @@ const Register = () => {
               <label className="label">Password</label>
               <input type="password" name="password" className="input" placeholder="Password" />
               <div>
-                <a className="link link-hover">Already have an account?</a>
+                <p>Already have an account? <Link className="link link-hover link-info" to={"/login"}>Login</Link> </p>
               </div>
               <button className="btn btn-neutral mt-4">Register</button>
             </form>
