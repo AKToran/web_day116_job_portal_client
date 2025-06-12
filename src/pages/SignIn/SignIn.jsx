@@ -15,8 +15,8 @@ const { loginUser, setLoading } = use(AuthContext);
     
     loginUser(email, password)
     .then(result =>{
-      const _ = result.user;
-      
+      const _ = result.user;  
+      form.reset();
     })
     .catch(err=>{
       console.log(err);
@@ -59,7 +59,7 @@ const { loginUser, setLoading } = use(AuthContext);
                   </Link>
                 </p>
               </div>
-              <button className="btn btn-neutral mt-4">Register</button>
+              <button className="btn btn-neutral mt-4">Sign In</button>
             </form>
           </div>
         </div>
