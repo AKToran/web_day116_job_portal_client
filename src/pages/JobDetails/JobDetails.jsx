@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
+import JobsCard from "../Shared/JobsCard";
 
-const JobsCard = ({ job }) => {
+const JobDetails = () => {
+  const job = useLoaderData();
+
   const {
     _id,
     title,
@@ -13,7 +16,7 @@ const JobsCard = ({ job }) => {
   } = job;
 
   return (
-    <div className="card bg-base-100 shadow-sm border-2 border-base-300">
+    <div className="card bg-base-100 shadow-sm border-2 border-base-300 m-4 md:m-20 p-4 md:p-20">
       <div className="card-body">
         <div className="flex items-center gap-2">
           <img className="w-10" src={company_logo} alt="" />
@@ -34,11 +37,13 @@ const JobsCard = ({ job }) => {
           ))}
         </div>
         <div className="card-actions justify-end">
-          <Link to={`jobs/${_id}`} className="btn btn-primary">Details</Link>
+          <Link to={`/job-apply/${_id}`} className="btn btn-primary">
+            Apply Now
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default JobsCard;
+export default JobDetails;
