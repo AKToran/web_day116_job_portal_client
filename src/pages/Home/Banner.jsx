@@ -11,7 +11,7 @@ const Banner = () => {
               transition: { duration: 5, repeat: Infinity },
             }}
             src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-            className="rounded-tl-[40px] border-pink-600 rounded-br-[40px] border-l-8 border-b-8 shadow-2xl"
+            className="rounded-tl-[40px] border-pink-600 rounded-br-[40kpx] border-l-8 border-b-8 shadow-2xl"
           /> 
           <motion.img animate={{
               x: [200, 100, 200],
@@ -34,7 +34,7 @@ const Banner = () => {
             Remote{" "}
             <motion.span
               animate={{
-                color: ["#ff5733", "#33ff33", "ba33ff"],
+                color: ["#ff5733", "#33ff33", "#ba33ff"],
                 transition: { duration: 3, repeat: Infinity },
               }}
             >
