@@ -4,11 +4,33 @@ import UseAuths from "../../hooks/UseAuths";
 const AddJob = () => {
   const { user } = UseAuths();
 
+  const handleAddAJob = e =>{
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const jobInfo = Object.fromEntries(formData.entries());
+
+    const { min, max, currency, ...newJob} = jobInfo;
+    newJob.salaryRange = {
+      min, max, currency
+    }
+    
+    const requirementsString = newJob.requirements;
+    const requirementsDirty = requirementsString.split(',');
+    const requirementsClean = requirementsDirty.map(req => req.trim());
+    newJob.requirements = requirementsClean;
+    
+    newJob.responsibilities = newJob.responsibilities.split(',').map(res=> res.trim());
+
+    console.log(newJob);
+
+  }
+
 
   return (
     <div>
       Please fill out this form:
-      <form>
+      <form onSubmit={handleAddAJob}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
           <legend className="fieldset-legend">Basic Info</legend>
 
