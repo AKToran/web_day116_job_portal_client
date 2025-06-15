@@ -1,31 +1,41 @@
 import React from "react";
 import UseAuths from "../../hooks/UseAuths";
+import axios from "axios";
 
 const AddJob = () => {
   const { user } = UseAuths();
 
-  const handleAddAJob = e =>{
+  const handleAddAJob = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const jobInfo = Object.fromEntries(formData.entries());
 
-    const { min, max, currency, ...newJob} = jobInfo;
+    const { min, max, currency, ...newJob } = jobInfo;
     newJob.salaryRange = {
-      min, max, currency
-    }
-    
+      min,
+      max,
+      currency,
+    };
+
     const requirementsString = newJob.requirements;
-    const requirementsDirty = requirementsString.split(',');
-    const requirementsClean = requirementsDirty.map(req => req.trim());
+    const requirementsDirty = requirementsString.split(",");
+    const requirementsClean = requirementsDirty.map((req) => req.trim());
     newJob.requirements = requirementsClean;
-    
-    newJob.responsibilities = newJob.responsibilities.split(',').map(res=> res.trim());
 
-    console.log(newJob);
+    newJob.responsibilities = newJob.responsibilities
+      .split(",")
+      .map((res) => res.trim());
 
-  }
+    newJob.status = "active";
 
+    axios
+      .post("http://localhost:3000/jobs", newJob)
+      .then((res) => console.log(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
