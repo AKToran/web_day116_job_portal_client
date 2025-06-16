@@ -8,7 +8,7 @@ const ApplicationList = ({myApplicationsPromise}) => {
     <div>
       <p>Jobs applied so far: {applications.length}</p>
       {
-        applications.map(appli => <li key={appli._id}>{appli._id}</li>)
+        applications.map(appli => <li key={appli._id}>{appli.jobId}</li>)
       }
     </div>
   );
