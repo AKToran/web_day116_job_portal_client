@@ -45,6 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path:'applications/:job_id',
+        hydrateFallbackElement: <p>loading applications.......</p>,
         element: <PrivateRoute><ViewApplications/></PrivateRoute>,
         loader: ({params})=>fetch(`http://localhost:3000/applications/job/${params.job_id}`)
       },
